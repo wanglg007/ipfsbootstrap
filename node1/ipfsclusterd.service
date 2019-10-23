@@ -1,0 +1,21 @@
+[Unit]
+#服务描述
+Description=Mdkmed ipfsclusterd Service
+#设置在某个服务启动后启动
+After=network.target ipfsd.service
+
+[Service]
+#后台运行的形式
+Type=forking
+#启动命令
+ExecStart=/usr/ipfscluster/start_ipfscluster.sh start
+#重启命令
+ExecReload=/usr/ipfscluster/restart_ipfscluster.sh
+#停止命令
+ExecStop=/usr/ipfscluster/stop_ipfscluster.sh stop
+#启动失败后执行重启命令
+Restart=on-failure
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
